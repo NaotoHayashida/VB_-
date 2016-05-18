@@ -22,23 +22,24 @@ Partial Class Main_Form
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Btn_CheckMakeData = New System.Windows.Forms.Button()
+        Me.Btn_ChangeMakeData = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.FolderName = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Btn_SetRenban = New System.Windows.Forms.Button()
-        Me.Btn_Clear = New System.Windows.Forms.Button()
+        Me.Btn_Next = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'Btn_CheckMakeData
+        'Btn_ChangeMakeData
         '
-        Me.Btn_CheckMakeData.Location = New System.Drawing.Point(13, 422)
-        Me.Btn_CheckMakeData.Name = "Btn_CheckMakeData"
-        Me.Btn_CheckMakeData.Size = New System.Drawing.Size(102, 23)
-        Me.Btn_CheckMakeData.TabIndex = 0
-        Me.Btn_CheckMakeData.Text = "作成日時確認"
-        Me.Btn_CheckMakeData.UseVisualStyleBackColor = True
+        Me.Btn_ChangeMakeData.Location = New System.Drawing.Point(13, 422)
+        Me.Btn_ChangeMakeData.Name = "Btn_ChangeMakeData"
+        Me.Btn_ChangeMakeData.Size = New System.Drawing.Size(102, 23)
+        Me.Btn_ChangeMakeData.TabIndex = 0
+        Me.Btn_ChangeMakeData.Text = "作成日時変更"
+        Me.Btn_ChangeMakeData.UseVisualStyleBackColor = True
+        Me.Btn_ChangeMakeData.Visible = False
         '
         'TableLayoutPanel1
         '
@@ -48,11 +49,12 @@ Partial Class Main_Form
         Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(13, 56)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(13, 67)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 19
+        Me.TableLayoutPanel1.RowCount = 15
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
@@ -85,7 +87,7 @@ Partial Class Main_Form
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(67, 33)
+        Me.Label2.Location = New System.Drawing.Point(67, 45)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(87, 12)
         Me.Label2.TabIndex = 3
@@ -94,7 +96,7 @@ Partial Class Main_Form
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(263, 33)
+        Me.Label3.Location = New System.Drawing.Point(263, 45)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(87, 12)
         Me.Label3.TabIndex = 4
@@ -109,15 +111,15 @@ Partial Class Main_Form
         Me.Btn_SetRenban.Text = "連番付与"
         Me.Btn_SetRenban.UseVisualStyleBackColor = True
         '
-        'Btn_Clear
+        'Btn_Next
         '
-        Me.Btn_Clear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Btn_Clear.Location = New System.Drawing.Point(312, 422)
-        Me.Btn_Clear.Name = "Btn_Clear"
-        Me.Btn_Clear.Size = New System.Drawing.Size(103, 23)
-        Me.Btn_Clear.TabIndex = 6
-        Me.Btn_Clear.Text = "クリア"
-        Me.Btn_Clear.UseVisualStyleBackColor = True
+        Me.Btn_Next.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Btn_Next.Location = New System.Drawing.Point(312, 422)
+        Me.Btn_Next.Name = "Btn_Next"
+        Me.Btn_Next.Size = New System.Drawing.Size(103, 23)
+        Me.Btn_Next.TabIndex = 6
+        Me.Btn_Next.Text = "NEXT"
+        Me.Btn_Next.UseVisualStyleBackColor = True
         '
         'Main_Form
         '
@@ -125,13 +127,13 @@ Partial Class Main_Form
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(424, 457)
-        Me.Controls.Add(Me.Btn_Clear)
+        Me.Controls.Add(Me.Btn_Next)
         Me.Controls.Add(Me.Btn_SetRenban)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.FolderName)
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Controls.Add(Me.Btn_CheckMakeData)
+        Me.Controls.Add(Me.Btn_ChangeMakeData)
         Me.Name = "Main_Form"
         Me.Text = "写真ファイル名変更ソフト"
         Me.ResumeLayout(False)
@@ -139,11 +141,11 @@ Partial Class Main_Form
 
     End Sub
 
-    Friend WithEvents Btn_CheckMakeData As Button
+    Friend WithEvents Btn_ChangeMakeData As Button
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents FolderName As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Btn_SetRenban As Button
-    Friend WithEvents Btn_Clear As Button
+    Friend WithEvents Btn_Next As Button
 End Class

@@ -15,10 +15,8 @@
 
         '複数ドロップの全てがフォルダーか判別
         Dim isAllFoleder As Boolean = True
-        Dim numArg As Integer = strDropPath.Count
-        Dim i As Integer
 
-        For i = 0 To (numArg - 1)
+        For i As Integer = 0 To (strDropPath.Count - 1)
             If IO.Directory.Exists(strDropPath(i).ToString) = False Then
                 isAllFoleder = False
                 Exit For
@@ -35,7 +33,8 @@
     End Sub
 
     Private Sub Main_Form_DragDrop(sender As Object, e As DragEventArgs) Handles Me.DragDrop
-
+        'ファルダ毎にオブジェクトを取り出して、処理に回す
+        'Dim folder As Object
 
     End Sub
 End Class
