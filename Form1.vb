@@ -34,7 +34,38 @@
 
     Private Sub Main_Form_DragDrop(sender As Object, e As DragEventArgs) Handles Me.DragDrop
         'ファルダ毎にオブジェクトを取り出して、処理に回す
-        'Dim folder As Object
+        Dim strDropPath As String() = CType(e.Data.GetData(DataFormats.FileDrop, False), String())
+
+        For Each folderPath As String In strDropPath
+
+            MainChangeName(folderPath)
+
+        Next
+    End Sub
+
+    Private Sub MainChangeName(ByVal folderPath As String)
+        'ファイル名変更のメイン関数
+        Dim preFolderPath As String = folderPath
+        Dim fileName As String
+        Dim fileNameList As New List(Of String)
+
+        'フォルダ配下のファイルコレクションを取得（jpg、mov、mtsに限定して）
+        'EnumerateFilesはgetFilesより高速とのことで採用
+        Dim pictureFiles = System.IO.Directory.EnumerateFiles(preFolderPath, "*.jpg" Or "*.mov" Or "*.mts")
+
+        For Each eachFile As String In pictureFiles
+            'eachFileはフルパスのためフォルダパス以下を取り出しファイル名のみ取得
+            fileName = eachFile.Substring(preFolderPath.Length + 1)
+
+            fileNameList.Add(fileName)  'fileNameをリストに追加
+
+        Next
+
+        'TableLayoutPanel1にファイル名セット
+        TableLayoutPanel1.SetColumn(TableLayoutPanel1, 0)
+
+
 
     End Sub
+
 End Class
