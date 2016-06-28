@@ -1,6 +1,12 @@
 ﻿Public Class Main_Form
+    '##################################
+    '#宣言
+    Friend Nextable As Boolean
+
+
     Private Sub Main_Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        FolderName.Text = "写真の入ったフォルダーをここにドロップする。"
+
+        Call Initialize()
     End Sub
 
 
@@ -33,39 +39,112 @@
     End Sub
 
     Private Sub Main_Form_DragDrop(sender As Object, e As DragEventArgs) Handles Me.DragDrop
-        'ファルダ毎にオブジェクトを取り出して、処理に回す
-        Dim strDropPath As String() = CType(e.Data.GetData(DataFormats.FileDrop, False), String())
 
+        Dim strDropPath As String() = CType(e.Data.GetData(DataFormats.FileDrop, False), String())
+        'ファルダを１つづつ取り出して、メイン処理に回す
         For Each folderPath As String In strDropPath
 
+            '処理中のフォルダのフルパスをFolderNameに変更する。
+            FolderName.Text = folderPath
+            'メイン処理に移行
             MainChangeName(folderPath)
+            ''Nextボタン押下まで(Nextable がtrueになるまで)待機
+            'While (Nextable)
+
+            'End While
 
         Next
+
     End Sub
+
+    Private Sub Initialize()
+
+        FolderName.Text = "ここに画像や動画の入ったフォルダーをドロップしてください。"
+        'リストの項目をクリア
+        Call RefreshListView()
+
+
+    End Sub
+
 
     Private Sub MainChangeName(ByVal folderPath As String)
         'ファイル名変更のメイン関数
-        Dim preFolderPath As String = folderPath
+        Dim preFilesList As List(Of String)     'フォルダ内の変換前ファイルを格納するリスト
+        Dim proFilesList As List(Of String)     'フォルダ内の変換後ファイルを格納するリスト
+
         Dim fileName As String
-        Dim fileNameList As New List(Of String)
 
-        'フォルダ配下のファイルコレクションを取得（jpg、mov、mtsに限定して）
-        'EnumerateFilesはgetFilesより高速とのことで採用
-        Dim pictureFiles = System.IO.Directory.EnumerateFiles(preFolderPath, "*.jpg" Or "*.mov" Or "*.mts")
+        'フォルダ配下の対象ファイル（jpg、mov、mtsに限定して）をリストとして取得（完全パスとして）
+        '※getfiles は複数の拡張子を検索条件に与えることができないのでLinqにて処理
+        Dim testlist = IO.Directory.EnumerateFiles(folderPath)
 
-        For Each eachFile As String In pictureFiles
-            'eachFileはフルパスのためフォルダパス以下を取り出しファイル名のみ取得
-            fileName = eachFile.Substring(preFolderPath.Length + 1)
 
-            fileNameList.Add(fileName)  'fileNameをリストに追加
+
+
+
+        'ファイル名変換候補を作成
+
+
+        'ListViewに表示
+        For Each f In testlist
+
+            ListView1.Items.Add(New ListViewItem(f))
 
         Next
 
-        'TableLayoutPanel1にファイル名セット
-        TableLayoutPanel1.SetColumn(TableLayoutPanel1, 0)
+
+
+        '対象ファイルの作成日時を修正確認する
+        'modifyCreateDay(files)
 
 
 
     End Sub
 
+    Private Sub modifyCreateDay(files As String())
+
+        For Each eachFile As String In files
+            '拡張子で処理を分岐するため拡張子取得
+            Dim extention As String = IO.Path.GetExtension(eachFile)
+
+            '
+            Select Case (extention)
+                Case ".jpg" Or ".JPG"
+
+                Case ".mts" Or ".MTS"
+
+                Case ".mov" Or ".MOV"
+
+
+            End Select
+
+        Next
+
+
+    End Sub
+    ' ListViewコントロールのデータを更新します。
+    Private Sub RefreshListView()
+
+        ' ListViewコントロールのデータをすべて消去します。
+        ListView1.Items.Clear()
+        ListView2.Items.Clear()
+
+
+    End Sub
+
+    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub Btn_Next_Click(sender As Object, e As EventArgs) Handles Btn_Next.Click
+
+        Nextable = True
+    End Sub
+
+
+    Private Sub Btn_Initialize_Click(sender As Object, e As EventArgs) Handles Btn_Initialize.Click
+        '終了ボタンを押下時は初期化処理
+        Call Initialize()
+
+    End Sub
 End Class
