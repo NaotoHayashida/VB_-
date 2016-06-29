@@ -45,6 +45,7 @@ Partial Class Main_Form
         '
         'Btn_Initialize
         '
+        Me.Btn_Initialize.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Btn_Initialize.Location = New System.Drawing.Point(1058, 422)
         Me.Btn_Initialize.Name = "Btn_Initialize"
         Me.Btn_Initialize.Size = New System.Drawing.Size(117, 23)
@@ -82,6 +83,7 @@ Partial Class Main_Form
         '
         'Btn_SetRenban
         '
+        Me.Btn_SetRenban.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Btn_SetRenban.Font = New System.Drawing.Font("MS UI Gothic", 9.0!)
         Me.Btn_SetRenban.Location = New System.Drawing.Point(744, 422)
         Me.Btn_SetRenban.Name = "Btn_SetRenban"
@@ -102,6 +104,9 @@ Partial Class Main_Form
         '
         'ListView1
         '
+        Me.ListView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
@@ -131,6 +136,9 @@ Partial Class Main_Form
         '
         'ListView2
         '
+        Me.ListView2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
         Me.ListView2.Cursor = System.Windows.Forms.Cursors.Default
         Me.ListView2.FullRowSelect = True
@@ -176,6 +184,7 @@ Partial Class Main_Form
         '
         'lbl_filenum_pre
         '
+        Me.lbl_filenum_pre.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lbl_filenum_pre.AutoSize = True
         Me.lbl_filenum_pre.Location = New System.Drawing.Point(13, 427)
         Me.lbl_filenum_pre.Name = "lbl_filenum_pre"
@@ -185,6 +194,7 @@ Partial Class Main_Form
         '
         'lbl_filenum_pro
         '
+        Me.lbl_filenum_pro.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbl_filenum_pro.AutoSize = True
         Me.lbl_filenum_pro.Location = New System.Drawing.Point(608, 427)
         Me.lbl_filenum_pro.Name = "lbl_filenum_pro"

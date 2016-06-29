@@ -83,8 +83,8 @@
 
         'フォルダ配下の対象ファイル（jpg、mov、mtsに限定して）をリストとして取得（完全パスとして）
         Dim allFiles = IO.Directory.EnumerateFiles(folderPath)          ' １、フォルダ以下の全ファイル取得
-        Dim selectedFiles = From files In allFiles Where files Like "*.JPG" Or files Like "*.MOV" Or files Like "*.MTS" ' ２、Linqにて対象ファイルを絞り込み
-
+        'Dim selectedFiles = From files In allFiles Where files Like "*.JPG" Or files Like "*.MOV" Or files Like "*.MTS" ' ２、Linqにて対象ファイルを絞り込み
+        Dim selectedFiles = From files In allFiles Where files Like "*.JPG"
 
 
 
@@ -96,7 +96,15 @@
         'ListViewに表示
         For Each f In selectedFiles
 
-            ListView1.Items.Add(New ListViewItem(f))
+            Dim fname = IO.Path.GetFileName(f)  'ファイル名を取得
+            Dim fmakeday = IO.File.GetCreationTime(f)   '作成日時を取得
+
+            '撮影日時（DateTimeOriginal）を取得
+            Dim fShootTime = getDateCreateOriginal(f)
+
+            Dim farray As String() = {fname, fmakeday.ToString, fShootTime.ToString}
+
+            ListView1.Items.Add(New ListViewItem(farray))
 
         Next
 
@@ -108,6 +116,21 @@
 
 
     End Sub
+
+    'JPGファイルのPathを受け取り、詳細プロパティの撮影日時（DateCreateOriginal）DateTime型を返す関数
+    Private Function getDateCreateOriginal(ByVal filePath As String)
+
+        Dim bmp = New System.Drawing.Bitmap(filePath)
+        Dim byte_fshootday = bmp.GetPropertyItem(&H9003).Value   '&Hは１６進数の事。Key0x9003はDateTimeOriginal（撮影日時）Excelデータ参照。
+        Dim str_fShootDay = System.Text.Encoding.ASCII.GetString(byte_fshootday)    'valueはバイト配列のアスキー文字なので通常の文字列にデコード
+
+        str_fShootDay = str_fShootDay.Trim(New Char() {ControlChars.NullChar})  ' 文末についている空白文字を削除   "2015:12:23 21:38:02" & vbNullChar
+        Dim date_fShootTime As DateTime = DateTime.ParseExact(str_fShootDay, "yyyy:MM:dd HH:mm:ss", Nothing)    'Stringの時間をDateTime型に変換
+
+        Return date_fShootTime
+    End Function
+
+
 
     Private Sub modifyCreateDay(files As String())
 
