@@ -22,7 +22,7 @@ Partial Class Main_Form
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Me.Btn_Initialize = New System.Windows.Forms.Button()
         Me.FolderNameHead = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -38,7 +38,9 @@ Partial Class Main_Form
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.FolderName = New System.Windows.Forms.Label()
+        Me.lbl_FolderName = New System.Windows.Forms.Label()
+        Me.lbl_filenum_pre = New System.Windows.Forms.Label()
+        Me.lbl_filenum_pro = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Btn_Initialize
@@ -104,7 +106,7 @@ Partial Class Main_Form
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5})
+        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.ListView1.Location = New System.Drawing.Point(15, 67)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(565, 349)
@@ -163,14 +165,32 @@ Partial Class Main_Form
         Me.Label1.Size = New System.Drawing.Size(0, 12)
         Me.Label1.TabIndex = 9
         '
-        'FolderName
+        'lbl_FolderName
         '
-        Me.FolderName.AutoSize = True
-        Me.FolderName.Location = New System.Drawing.Point(85, 13)
-        Me.FolderName.Name = "FolderName"
-        Me.FolderName.Size = New System.Drawing.Size(38, 12)
-        Me.FolderName.TabIndex = 10
-        Me.FolderName.Text = "Label4"
+        Me.lbl_FolderName.AutoSize = True
+        Me.lbl_FolderName.Location = New System.Drawing.Point(85, 13)
+        Me.lbl_FolderName.Name = "lbl_FolderName"
+        Me.lbl_FolderName.Size = New System.Drawing.Size(82, 12)
+        Me.lbl_FolderName.TabIndex = 10
+        Me.lbl_FolderName.Text = "lbl_FolderName"
+        '
+        'lbl_filenum_pre
+        '
+        Me.lbl_filenum_pre.AutoSize = True
+        Me.lbl_filenum_pre.Location = New System.Drawing.Point(13, 427)
+        Me.lbl_filenum_pre.Name = "lbl_filenum_pre"
+        Me.lbl_filenum_pre.Size = New System.Drawing.Size(78, 12)
+        Me.lbl_filenum_pre.TabIndex = 11
+        Me.lbl_filenum_pre.Text = "lbl_filenum_pre"
+        '
+        'lbl_filenum_pro
+        '
+        Me.lbl_filenum_pro.AutoSize = True
+        Me.lbl_filenum_pro.Location = New System.Drawing.Point(608, 427)
+        Me.lbl_filenum_pro.Name = "lbl_filenum_pro"
+        Me.lbl_filenum_pro.Size = New System.Drawing.Size(78, 12)
+        Me.lbl_filenum_pro.TabIndex = 12
+        Me.lbl_filenum_pro.Text = "lbl_filenum_pro"
         '
         'Main_Form
         '
@@ -178,7 +198,9 @@ Partial Class Main_Form
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1207, 457)
-        Me.Controls.Add(Me.FolderName)
+        Me.Controls.Add(Me.lbl_filenum_pro)
+        Me.Controls.Add(Me.lbl_filenum_pre)
+        Me.Controls.Add(Me.lbl_FolderName)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ListView2)
         Me.Controls.Add(Me.ListView1)
@@ -211,5 +233,7 @@ Partial Class Main_Form
     Friend WithEvents ColumnHeader6 As ColumnHeader
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents Label1 As Label
-    Friend WithEvents FolderName As Label
+    Friend WithEvents lbl_FolderName As Label
+    Friend WithEvents lbl_filenum_pre As Label
+    Friend WithEvents lbl_filenum_pro As Label
 End Class

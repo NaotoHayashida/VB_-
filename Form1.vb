@@ -45,7 +45,7 @@
         For Each folderPath As String In strDropPath
 
             '処理中のフォルダのフルパスをFolderNameに変更する。
-            FolderName.Text = folderPath
+            lbl_FolderName.Text = folderPath
             'メイン処理に移行
             MainChangeName(folderPath)
             ''Nextボタン押下まで(Nextable がtrueになるまで)待機
@@ -59,10 +59,17 @@
 
     Private Sub Initialize()
 
-        FolderName.Text = "ここに画像や動画の入ったフォルダーをドロップしてください。"
+        lbl_FolderName.Text = "ここに画像や動画の入ったフォルダーをドロップしてください。"
         'リストの項目をクリア
-        Call RefreshListView()
+        ListView1.Items.Clear()
+        ListView2.Items.Clear()
 
+        'lbl_FolderNameのフォルダ名をクリア
+        lbl_FolderName.Text = ""
+
+        'ファイル数の表記をクリア
+        lbl_filenum_pre.Text = "ファイル数　：　"
+        lbl_filenum_pro.Text = "ファイル数　：　"
 
     End Sub
 
@@ -75,8 +82,9 @@
         Dim fileName As String
 
         'フォルダ配下の対象ファイル（jpg、mov、mtsに限定して）をリストとして取得（完全パスとして）
-        '※getfiles は複数の拡張子を検索条件に与えることができないのでLinqにて処理
-        Dim testlist = IO.Directory.EnumerateFiles(folderPath)
+        Dim allFiles = IO.Directory.EnumerateFiles(folderPath)          ' １、フォルダ以下の全ファイル取得
+        Dim selectedFiles = From files In allFiles Where files Like "*.JPG" Or files Like "*.MOV" Or files Like "*.MTS" ' ２、Linqにて対象ファイルを絞り込み
+
 
 
 
@@ -86,7 +94,7 @@
 
 
         'ListViewに表示
-        For Each f In testlist
+        For Each f In selectedFiles
 
             ListView1.Items.Add(New ListViewItem(f))
 
@@ -123,14 +131,6 @@
 
     End Sub
     ' ListViewコントロールのデータを更新します。
-    Private Sub RefreshListView()
-
-        ' ListViewコントロールのデータをすべて消去します。
-        ListView1.Items.Clear()
-        ListView2.Items.Clear()
-
-
-    End Sub
 
     Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
 
