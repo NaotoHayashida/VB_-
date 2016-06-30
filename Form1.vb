@@ -83,8 +83,8 @@
 
         'フォルダ配下の対象ファイル（jpg、mov、mtsに限定して）をリストとして取得（完全パスとして）
         Dim allFiles = IO.Directory.EnumerateFiles(folderPath)          ' １、フォルダ以下の全ファイル取得
-        'Dim selectedFiles = From files In allFiles Where files Like "*.JPG" Or files Like "*.MOV" Or files Like "*.MTS" ' ２、Linqにて対象ファイルを絞り込み
-        Dim selectedFiles = From files In allFiles Where files Like "*.JPG"
+        Dim selectedFiles = From files In allFiles Where files Like "*.JPG" Or files Like "*.MOV" Or files Like "*.MTS" ' ２、Linqにて対象ファイルを絞り込み
+        'Dim selectedFiles = From files In allFiles Where files Like "*.JPG" Or files Like "*.MOV"
 
 
 
@@ -99,10 +99,17 @@
             Dim fname = IO.Path.GetFileName(f)  'ファイル名を取得
             Dim fmakeday = IO.File.GetCreationTime(f)   '作成日時を取得
 
-            '撮影日時（DateTimeOriginal）を取得
-            Dim fShootTime = getDateCreateOriginal(f)
+            'JPGファイルの場合は撮影日時（DateTimeOriginal）を取得
+            Dim str_fShootTime As String = ""
+            If (IO.Path.GetExtension(f) = ".JPG") Then
 
-            Dim farray As String() = {fname, fmakeday.ToString, fShootTime.ToString}
+                Dim fShootTime = getDateCreateOriginal(f)
+                str_fShootTime = fShootTime.ToString
+
+            End If
+
+            Dim farray As String() = {fname, fmakeday.ToString, str_fShootTime}
+
 
             ListView1.Items.Add(New ListViewItem(farray))
 
@@ -127,6 +134,7 @@
         str_fShootDay = str_fShootDay.Trim(New Char() {ControlChars.NullChar})  ' 文末についている空白文字を削除   "2015:12:23 21:38:02" & vbNullChar
         Dim date_fShootTime As DateTime = DateTime.ParseExact(str_fShootDay, "yyyy:MM:dd HH:mm:ss", Nothing)    'Stringの時間をDateTime型に変換
 
+        bmp.Dispose()
         Return date_fShootTime
     End Function
 
@@ -154,10 +162,6 @@
 
     End Sub
     ' ListViewコントロールのデータを更新します。
-
-    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
-
-    End Sub
 
     Private Sub Btn_Next_Click(sender As Object, e As EventArgs) Handles Btn_Next.Click
 
