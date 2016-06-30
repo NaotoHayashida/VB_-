@@ -131,7 +131,7 @@ Partial Class Main_Form
         '
         'ColumnHeader3
         '
-        Me.ColumnHeader3.Text = "撮影日時"
+        Me.ColumnHeader3.Text = "撮影日時、または更新日時"
         Me.ColumnHeader3.Width = 180
         '
         'ListView2
@@ -162,7 +162,7 @@ Partial Class Main_Form
         '
         'ColumnHeader6
         '
-        Me.ColumnHeader6.Text = "撮影日時"
+        Me.ColumnHeader6.Text = "撮影日時、または更新時期"
         Me.ColumnHeader6.Width = 180
         '
         'Label1
@@ -188,9 +188,9 @@ Partial Class Main_Form
         Me.lbl_filenum_pre.AutoSize = True
         Me.lbl_filenum_pre.Location = New System.Drawing.Point(13, 427)
         Me.lbl_filenum_pre.Name = "lbl_filenum_pre"
-        Me.lbl_filenum_pre.Size = New System.Drawing.Size(78, 12)
+        Me.lbl_filenum_pre.Size = New System.Drawing.Size(61, 12)
         Me.lbl_filenum_pre.TabIndex = 11
-        Me.lbl_filenum_pre.Text = "lbl_filenum_pre"
+        Me.lbl_filenum_pre.Text = "ファイル数 : "
         '
         'lbl_filenum_pro
         '
@@ -198,9 +198,9 @@ Partial Class Main_Form
         Me.lbl_filenum_pro.AutoSize = True
         Me.lbl_filenum_pro.Location = New System.Drawing.Point(608, 427)
         Me.lbl_filenum_pro.Name = "lbl_filenum_pro"
-        Me.lbl_filenum_pro.Size = New System.Drawing.Size(78, 12)
+        Me.lbl_filenum_pro.Size = New System.Drawing.Size(61, 12)
         Me.lbl_filenum_pro.TabIndex = 12
-        Me.lbl_filenum_pro.Text = "lbl_filenum_pro"
+        Me.lbl_filenum_pro.Text = "ファイル数 : "
         '
         'Main_Form
         '

@@ -83,8 +83,8 @@
 
         'フォルダ配下の対象ファイル（jpg、mov、mtsに限定して）をリストとして取得（完全パスとして）
         Dim allFiles = IO.Directory.EnumerateFiles(folderPath)          ' １、フォルダ以下の全ファイル取得
-        Dim selectedFiles = From files In allFiles Where files Like "*.JPG" Or files Like "*.MOV" Or files Like "*.MTS" ' ２、Linqにて対象ファイルを絞り込み
-        'Dim selectedFiles = From files In allFiles Where files Like "*.JPG" Or files Like "*.MOV"
+        Dim selectedFiles = From files In allFiles
+                            Where files Like "*.JPG" Or files Like "*.MOV" Or files Like "*.MTS" ' ２、Linqにて対象ファイルを絞り込み
 
 
 
@@ -94,28 +94,19 @@
 
 
         'ListViewに表示
-        For Each f In selectedFiles
+        For Each file In selectedFiles
 
-            Dim fname = IO.Path.GetFileName(f)  'ファイル名を取得
-            Dim fmakeday = IO.File.GetCreationTime(f)   '作成日時を取得
+            Dim array_Items As String() = getEachItems(file)
+            ListView1.Items.Add(New ListViewItem(array_Items))
 
-            'JPGファイルの場合は撮影日時（DateTimeOriginal）を取得
-            Dim str_fShootTime As String = ""
-            If (IO.Path.GetExtension(f) = ".JPG") Then
-
-                Dim fShootTime = getDateCreateOriginal(f)
-                str_fShootTime = fShootTime.ToString
-
-            End If
-
-            Dim farray As String() = {fname, fmakeday.ToString, str_fShootTime}
-
-
-            ListView1.Items.Add(New ListViewItem(farray))
+            preFilesList.AddRange(getEachItems(file))
+            ListView2.Items.AddRange(New ListViewItem(preFilesList))
 
         Next
 
-
+        '変更前と変更後のファイル数をLabelに表示する
+        lbl_filenum_pre.Text = lbl_filenum_pre.Text + ListView1.Items.Count.ToString
+        lbl_filenum_pro.Text = lbl_filenum_pro.Text + ListView2.Items.Count.ToString
 
         '対象ファイルの作成日時を修正確認する
         'modifyCreateDay(files)
@@ -137,6 +128,35 @@
         bmp.Dispose()
         Return date_fShootTime
     End Function
+
+    '全対象ファイルを受け取ってそれぞれのファイルの項目を取得して返す関数
+    Private Function getEachItems(ByVal selectedFiles As String)
+        Dim f As String = selectedFiles
+
+        Dim fname = IO.Path.GetFileName(f)  'ファイル名を取得
+        Dim fmakeday = IO.File.GetCreationTime(f)   '作成日時を取得
+
+        '撮影日時（DateTimeOriginal）または、更新日時（LastWriteTime）を取得
+        Dim str_fShootTime As String = ""
+
+        If (IO.Path.GetExtension(f) = ".JPG") Then
+            'JPGファイルの場合は撮影日時（DateTimeOriginal）を取得
+            Dim fShootTime = getDateCreateOriginal(f)
+            str_fShootTime = fShootTime.ToString
+
+        ElseIf (IO.Path.GetExtension(f) = ".MOV" OrElse IO.Path.GetExtension(f) = ".MTS") Then
+            'MOV,MTSファイルは更新日時（LastWriteTime）を取得
+            Dim fLastTime = IO.File.GetLastWriteTime(f)
+            str_fShootTime = fLastTime.ToString
+
+        End If
+
+        Dim EachItems As String() = {fname, fmakeday.ToString, str_fShootTime}
+
+        Return EachItems    '// String()
+    End Function
+
+
 
 
 
